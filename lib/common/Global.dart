@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+class Global {
+  static var isLogin = false;
+// static var appTheme = AppThemes.first;
+}
+
 // App主题色
 const AppThemes = <MaterialColor>[
   Colors.blue,
@@ -9,11 +14,3 @@ const AppThemes = <MaterialColor>[
   Colors.green,
   Colors.red,
 ];
-
-class Global {
-  static SharedPreferences sharedPreferences;
-
-  static Future init() async {
-    sharedPreferences = await SharedPreferences.getInstance();
-  }
-}
