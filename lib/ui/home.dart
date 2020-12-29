@@ -1,4 +1,6 @@
+import 'package:fire/common/Global.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 /// 主页
 class HomePage extends StatefulWidget {
@@ -9,34 +11,73 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      //容器外填充
-      margin: EdgeInsets.only(top: 50.0, left: 120.0),
-      //卡片大小
-      constraints: BoxConstraints.tightFor(width: 200.0, height: 150.0),
-      //背景装饰
-      decoration: BoxDecoration(
-          //背景径向渐变
-          gradient: RadialGradient(
-              colors: [Colors.red, Colors.orange],
-              center: Alignment.topLeft,
-              radius: .98),
-          //卡片阴影
-          boxShadow: [
-            BoxShadow(
-                color: Colors.black54,
-                offset: Offset(2.0, 2.0),
-                blurRadius: 4.0)
-          ]),
-      //卡片倾斜变换
-      transform: Matrix4.rotationZ(.2),
-      //卡片内文字居中
-      alignment: Alignment.center,
-      child: Text(
-        "Flutter",
-        style: TextStyle(color: Colors.white, fontSize: 40.0),
+    var listWidgets = List<Widget>();
+    for (var i = 0; i < 20; i++) {
+      listWidgets.add(Container(
+        height: 50,
+        color: Colors.amber[i * 50],
+        child: Center(child: Text("Item $i")),
+      ));
+    }
+
+    for (var temp, i = 0, j = 1; j < 30; temp = i, i = j, j = i + temp) {
+      print('$j');
+    }
+
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(Global.appName),
+      ),
+      drawer: Drawer(
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: <Widget>[
+            DrawerHeader(
+              decoration: BoxDecoration(
+                color: Colors.blue,
+              ),
+              child: Text(
+                'Drawer Header',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 24,
+                ),
+              ),
+            ),
+            ListTile(
+              leading: Icon(Icons.message),
+              title: Text('Messages'),
+              onTap: () {
+                Fluttertoast.showToast(
+                    msg: "This is Center Short Toast",
+                    toastLength: Toast.LENGTH_SHORT,
+                    gravity: ToastGravity.CENTER,
+                    timeInSecForIosWeb: 1,
+                    backgroundColor: Colors.red,
+                    textColor: Colors.white,
+                    fontSize: 16.0);
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.account_circle),
+              title: Text('Profile'),
+              onTap: () {
+                ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                  content: Text("toast"),
+                ));
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.settings),
+              title: Text('Settings'),
+            ),
+          ],
+        ),
+      ),
+      body: ListView(
+        padding: const EdgeInsets.all(8),
+        children: listWidgets,
       ),
     );
-    ;
   }
 }
