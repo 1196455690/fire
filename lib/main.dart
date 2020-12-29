@@ -1,16 +1,22 @@
-import 'package:fire/common/Global.dart';
+import 'dart:io';
+
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
+import 'package:flutter/services.dart';
 
 import 'ui/home.dart';
 
-void main() => runApp(new MyApp());
+void main() {
+  // if (Platform.isAndroid) {
+  //   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+  //     systemNavigationBarColor: Colors.transparent,
+  //   ));
+  // }
 
-// void main() {
-//   debugPaintSizeEnabled = false; // 显示布局边界
-//   Global.init();
-//   runApp(new MyApp());
-// }
+  // debugPaintSizeEnabled = false; // 显示布局边界
+  // Global.init();
+
+  runApp(new MyApp());
+}
 
 class MyApp extends StatelessWidget {
   @override
